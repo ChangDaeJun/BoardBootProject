@@ -6,20 +6,19 @@ import org.springframework.data.annotation.CreatedDate;
 import java.util.Date;
 
 @Entity
-public class User {
+public class Likes {
     @Id
     private Long id;
 
-    @Column
-    private String email;
+    @JoinColumn
+    @OneToOne
+    private Board board;
 
-    @Column
-    private String password;
-
-    @Column
-    private String name;
+    @JoinColumn
+    @OneToOne
+    private User user;
 
     @Column
     @CreatedDate
-    private Date joinDate;
+    private Date createDate;
 }

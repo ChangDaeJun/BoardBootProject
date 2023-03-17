@@ -6,20 +6,22 @@ import org.springframework.data.annotation.CreatedDate;
 import java.util.Date;
 
 @Entity
-public class User {
+public class Comment {
     @Id
     private Long id;
 
-    @Column
-    private String email;
+    @JoinColumn
+    @OneToOne
+    private Board board;
 
-    @Column
-    private String password;
+    @JoinColumn
+    @OneToOne
+    private User user;
 
-    @Column
-    private String name;
+    @Column(columnDefinition = "TEXT")
+    private String text;
 
     @Column
     @CreatedDate
-    private Date joinDate;
+    private Date createDate;
 }
