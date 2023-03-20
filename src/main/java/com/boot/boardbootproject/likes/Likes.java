@@ -1,28 +1,24 @@
-package com.boot.boardbootproject.domain;
+package com.boot.boardbootproject.likes;
 
+import com.boot.boardbootproject.board.Board;
+import com.boot.boardbootproject.user.User;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
-public class Board {
+public class Likes {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
     @JoinColumn
+    @OneToOne
+    private Board board;
+
+    @JoinColumn
+    @OneToOne
     private User user;
-
-    @Column(length = 200)
-    private String title;
-
-    @Column(columnDefinition ="LONGTEXT")
-    private String text;
-
-    @Column
-    private Long view;
 
     @Column
     @CreatedDate

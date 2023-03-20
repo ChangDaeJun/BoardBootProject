@@ -1,6 +1,5 @@
 package com.boot.boardbootproject.likes;
 
-import com.boot.boardbootproject.domain.Likes;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

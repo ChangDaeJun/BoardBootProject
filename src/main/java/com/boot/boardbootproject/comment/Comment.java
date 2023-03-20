@@ -1,5 +1,7 @@
-package com.boot.boardbootproject.domain;
+package com.boot.boardbootproject.comment;
 
+import com.boot.boardbootproject.board.Board;
+import com.boot.boardbootproject.user.User;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 

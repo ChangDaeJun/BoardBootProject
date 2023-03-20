@@ -1,6 +1,6 @@
 package com.boot.boardbootproject.user.service;
 
-import com.boot.boardbootproject.domain.User;
+import com.boot.boardbootproject.user.User;
 import com.boot.boardbootproject.user.dto.UserJoinForm;
 import com.boot.boardbootproject.user.dto.UserUpdateNameForm;
 import com.boot.boardbootproject.user.dto.UserUpdatePasswordForm;
@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
-import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.is;

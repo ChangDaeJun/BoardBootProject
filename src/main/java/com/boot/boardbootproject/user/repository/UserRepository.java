@@ -1,6 +1,6 @@
 package com.boot.boardbootproject.user.repository;
 
-import com.boot.boardbootproject.domain.User;
+import com.boot.boardbootproject.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

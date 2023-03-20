@@ -1,6 +1,6 @@
 package com.boot.boardbootproject.user.service;
 
-import com.boot.boardbootproject.domain.User;
+import com.boot.boardbootproject.user.User;
 import com.boot.boardbootproject.user.dto.UserJoinForm;
 import com.boot.boardbootproject.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;

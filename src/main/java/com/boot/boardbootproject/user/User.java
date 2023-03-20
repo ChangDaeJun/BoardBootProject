@@ -1,4 +1,4 @@
-package com.boot.boardbootproject.domain;
+package com.boot.boardbootproject.user;
 
 import jakarta.persistence.*;
 import lombok.Getter;
