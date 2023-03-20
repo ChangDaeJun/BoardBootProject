@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -15,6 +16,7 @@ public class UserJoinServiceImpl implements UserJoinService {
     private final UserRepository userRepository;
 
     @Override
+    @Transactional
     public Long join(UserJoinForm form) throws Exception{
         validateDuplication(form);
         User user = new User(form);
@@ -25,6 +27,7 @@ public class UserJoinServiceImpl implements UserJoinService {
     private void validateDuplication(UserJoinForm form) throws Exception{
         String email = form.getEmail();
         String name = form.getName();
-        if(userRepository.existsUserByName(name) || userRepository.existsUserByEmail(email)) throw new Exception();
+        if(userRepository.existsUserByName(name)) throw new Exception();
+        else if(userRepository.existsUserByEmail(email)) throw new Exception();
     }
 }

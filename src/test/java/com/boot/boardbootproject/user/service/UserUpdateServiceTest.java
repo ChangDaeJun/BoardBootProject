@@ -36,6 +36,7 @@ class UserUpdateServiceTest {
         form1.setId(id);
         form1.setPassword("newPassword");
 
+        userUpdateService.updatePassword(form1);
         User user = userRepository.findById(id).get();
 
         assertThat(user.getPassword(), is(form1.getPassword()));
@@ -54,9 +55,10 @@ class UserUpdateServiceTest {
         form1.setId(id);
         form1.setName("newName");
 
+        userUpdateService.updateName(form1);
         User user = userRepository.findById(id).get();
 
-        assertThat(user.getPassword(), is(form1.getName()));
+        assertThat(user.getName(), is(form1.getName()));
     }
 
     @Test
@@ -69,11 +71,11 @@ class UserUpdateServiceTest {
         Long id = userJoinService.join(form);
 
         UserJoinForm form1 = new UserJoinForm();
-        form1.setEmail("testemaile");
+        form1.setEmail("testemaile11");
         form1.setName("oldName");
         form1.setPassword("testpassworddddd");
 
-        Long id1 = userJoinService.join(form);
+        Long id1 = userJoinService.join(form1);
 
         UserUpdateNameForm updateNameForm = new UserUpdateNameForm();
         updateNameForm.setId(id1);
