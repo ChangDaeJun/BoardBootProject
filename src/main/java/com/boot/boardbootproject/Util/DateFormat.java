@@ -10,4 +10,7 @@ public final class DateFormat {
         return dateFormat.format(date);
     }
 
+    public static Date now(){
+        return new Date(System.currentTimeMillis());
+    }
 }

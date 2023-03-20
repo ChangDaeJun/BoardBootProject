@@ -5,6 +5,7 @@ import com.boot.boardbootproject.user.dto.UserGetForm;
 import com.boot.boardbootproject.user.dto.UserJoinForm;
 import com.boot.boardbootproject.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.matchers.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -81,14 +82,12 @@ class UserGetServiceTest {
     @Test
     void notFound(){
         Long id = 1L;
-        while (!userRepository.existsUserById(id)){
+        while (userRepository.existsUserById(id)){
             id++;
         }
 
-        try {
-            UserGetForm userGetForm = userGetService.getById(id);
-            fail();
-        }catch (Exception e){
-        }
+        UserGetForm userGetForm = userGetService.getById(id);
+
+        assertThat(userGetForm, is(nullValue()));
     }
 }

@@ -12,6 +12,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsUserByEmail(String email);
     boolean existsUserById(Long id);
 
-    @Query("select new com.boot.boardbootproject.user.dto.UserGetForm(u.id, u.name, u.joinDate) from User as u where u.id =: id")
+    @Query("select new com.boot.boardbootproject.user.dto.UserGetForm(u.id, u.name, u.joinDate) from User as u where u.id =:id")
     UserGetForm findGetFormById(Long id);
 }
