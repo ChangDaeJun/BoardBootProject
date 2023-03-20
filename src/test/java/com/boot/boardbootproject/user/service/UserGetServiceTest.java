@@ -1,5 +1,6 @@
 package com.boot.boardbootproject.user.service;
 
+import com.boot.boardbootproject.Util.DateFormat;
 import com.boot.boardbootproject.user.dto.UserGetForm;
 import com.boot.boardbootproject.user.dto.UserJoinForm;
 import com.boot.boardbootproject.user.repository.UserRepository;
@@ -72,8 +73,7 @@ class UserGetServiceTest {
 
         UserGetForm userForm1 = userGetService.getById(id1);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String now = dateFormat.format(new Date(System.currentTimeMillis()));
+        String now = DateFormat.getYYYYMMdd(new Date(System.currentTimeMillis()));
 
         assertThat(userForm1.getCreateDate(), is(now));
     }
