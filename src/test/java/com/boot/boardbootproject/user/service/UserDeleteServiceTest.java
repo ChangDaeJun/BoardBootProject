@@ -23,7 +23,7 @@ class UserDeleteServiceTest {
     private UserRepository userRepository;
 
     @Test
-    void delete() {
+    void delete() throws Exception{
         UserJoinForm form = new UserJoinForm();
         form.setEmail("testemailqq");
         form.setName("testnameqq");

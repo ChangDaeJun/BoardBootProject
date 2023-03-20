@@ -22,7 +22,7 @@ class UserRepositoryTest {
     @Autowired
     private UserJoinService userJoinService;
     @Test
-    void findGetFormById() {
+    void findGetFormById() throws Exception{
         UserJoinForm form = new UserJoinForm();
         form.setEmail("aaaaaa");
         form.setName("testnaaaa");

@@ -1,5 +1,6 @@
 package com.boot.boardbootproject.user;
 
+import com.boot.boardbootproject.user.dto.UserJoinForm;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,4 +28,13 @@ public class User {
     @Column
     @CreatedDate
     private Date joinDate;
+
+    public User(UserJoinForm form) {
+        this.email = form.getEmail();
+        this.password = form.getPassword();
+        this.name = form.getName();
+    }
+
+    public User() {
+    }
 }

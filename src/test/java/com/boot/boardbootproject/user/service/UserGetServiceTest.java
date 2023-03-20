@@ -27,7 +27,7 @@ class UserGetServiceTest {
     private UserRepository userRepository;
 
     @Test
-    void getById_one() {
+    void getById_one() throws Exception{
         UserJoinForm form = new UserJoinForm();
         form.setEmail("testemail12");
         form.setName("testname12");
@@ -42,7 +42,7 @@ class UserGetServiceTest {
     }
 
     @Test
-    void getById_compare_another() {
+    void getById_compare_another() throws Exception{
         UserJoinForm form1 = new UserJoinForm();
         form1.setEmail("testemkkail123");
         form1.setName("testnkkame123");
@@ -64,7 +64,7 @@ class UserGetServiceTest {
     }
 
     @Test
-    void check_createDateForm(){
+    void check_createDateForm() throws Exception{
         UserJoinForm form1 = new UserJoinForm();
         form1.setEmail("testedfdmkkailaa");
         form1.setName("tesdddtnkkameaa");

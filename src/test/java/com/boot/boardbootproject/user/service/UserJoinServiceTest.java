@@ -23,7 +23,7 @@ class UserJoinServiceTest {
     private UserRepository userRepository;
 
     @Test
-    void join() {
+    void join() throws Exception{
         UserJoinForm form = new UserJoinForm();
         form.setEmail("testemail");
         form.setName("testname");
@@ -44,18 +44,18 @@ class UserJoinServiceTest {
     }
 
     @Test
-    void join_fail_because_duplicate_email(){
+    void join_fail_because_duplicate_email() throws Exception{
         UserJoinForm form = new UserJoinForm();
         form.setEmail("testemail1");
-        form.setName("testname");
+        form.setName("testnameasdf");
         form.setPassword("testpassword");
 
         Long id = userJoinService.join(form);
 
         UserJoinForm form1 = new UserJoinForm();
-        form.setEmail("testemail1");
-        form.setName("testnameuiuii");
-        form.setPassword("testpassuiuiuiword");
+        form1.setEmail("testemail1");
+        form1.setName("testnameuiuii");
+        form1.setPassword("testpassuiuiuiword");
 
         try {
             Long id1 = userJoinService.join(form1);
@@ -65,18 +65,18 @@ class UserJoinServiceTest {
     }
 
     @Test
-    void join_fail_because_duplicate_name(){
+    void join_fail_because_duplicate_name() throws Exception{
         UserJoinForm form = new UserJoinForm();
-        form.setEmail("testemail");
-        form.setName("testname");
+        form.setEmail("testemail1qq");
+        form.setName("testnameddddd");
         form.setPassword("testpassword");
 
         Long id = userJoinService.join(form);
 
         UserJoinForm form1 = new UserJoinForm();
-        form.setEmail("testemail1212");
-        form.setName("testname");
-        form.setPassword("testpassuiuiuiword");
+        form1.setEmail("testemail1212");
+        form1.setName("testnameddddd");
+        form1.setPassword("testpassuiuiuiword");
 
         try {
             Long id1 = userJoinService.join(form1);

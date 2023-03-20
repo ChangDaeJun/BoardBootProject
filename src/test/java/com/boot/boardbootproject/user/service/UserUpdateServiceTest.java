@@ -24,7 +24,7 @@ class UserUpdateServiceTest {
     private UserRepository userRepository;
 
     @Test
-    void updatePassword() {
+    void updatePassword() throws Exception{
         UserJoinForm form = new UserJoinForm();
         form.setEmail("testemailb");
         form.setName("testnameb");
@@ -42,7 +42,7 @@ class UserUpdateServiceTest {
     }
 
     @Test
-    void updateName() {
+    void updateName() throws Exception{
         UserJoinForm form = new UserJoinForm();
         form.setEmail("testemailc");
         form.setName("testnamec");
@@ -60,7 +60,7 @@ class UserUpdateServiceTest {
     }
 
     @Test
-    void update_fail_because_duplicate_name(){
+    void update_fail_because_duplicate_name() throws Exception{
         UserJoinForm form = new UserJoinForm();
         form.setEmail("testemaild");
         form.setName("duplicate");
