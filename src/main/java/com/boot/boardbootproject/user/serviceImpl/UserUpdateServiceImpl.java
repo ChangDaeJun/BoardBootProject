@@ -16,13 +16,8 @@ public class UserUpdateServiceImpl implements UserUpdateService {
     @Override
     @Transactional
     public void updatePassword(UserUpdatePasswordForm form) throws Exception{
-        validate(form);
         User user = userRepository.findById(form.getId()).get();
         user.setPassword(form.getPassword());
-    }
-
-    private void validate(UserUpdatePasswordForm form) throws Exception{
-        if(!userRepository.existsUserById(form.getId())) throw new Exception();
     }
 
     @Override
@@ -34,7 +29,6 @@ public class UserUpdateServiceImpl implements UserUpdateService {
     }
 
     private void validate(UserUpdateNameForm form) throws Exception{
-        if(!userRepository.existsUserById(form.getId())) throw new Exception();
-        else if(userRepository.existsUserByName(form.getName())) throw new Exception();
+        if(userRepository.existsUserByName(form.getName())) throw new Exception();
     }
 }

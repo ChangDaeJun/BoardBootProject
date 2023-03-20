@@ -42,7 +42,7 @@ class UserDeleteServiceTest {
     @Test
     void delete_fail_because_NotFoundId(){
         Long id = 1L;
-        while (!userRepository.existsUserById(id)){
+        while (userRepository.existsUserById(id)){
             id++;
         }
 
