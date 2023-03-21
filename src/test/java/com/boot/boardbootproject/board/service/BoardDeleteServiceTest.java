@@ -3,8 +3,11 @@ package com.boot.boardbootproject.board.service;
 import com.boot.boardbootproject.board.dto.BoardWriteForm;
 import com.boot.boardbootproject.board.repository.BoardRepository;
 import com.boot.boardbootproject.user.dto.UserJoinForm;
+import com.boot.boardbootproject.user.service.UserDeleteService;
 import com.boot.boardbootproject.user.service.UserJoinService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,10 +31,12 @@ class BoardDeleteServiceTest {
     UserJoinService userJoinService;
     @Autowired
     BoardRepository boardRepository;
+    @Autowired
+    UserDeleteService userDeleteService;
 
     private Long userId;
 
-    @BeforeAll
+    @BeforeEach
     void before() throws Exception{
         UserJoinForm userJoinForm = new UserJoinForm();
         userJoinForm.setName("test");
@@ -40,6 +45,10 @@ class BoardDeleteServiceTest {
         this.userId = userJoinService.join(userJoinForm);
     }
 
+    @AfterEach
+    void after() throws Exception{
+        userDeleteService.delete(this.userId);
+    }
     @Test
     void deleteById() throws Exception{
         BoardWriteForm boardWriteForm = new BoardWriteForm();
@@ -70,6 +79,6 @@ class BoardDeleteServiceTest {
         boardDeleteService.deleteByUserId(this.userId);
         List<Long> ids = boardRepository.findIdByUserId(this.userId);
 
-        assertThat(ids, is(nullValue()));
+        assertThat(ids.size(), is(0));
     }
 }
