@@ -40,6 +40,7 @@ public class Board {
         this.title = form.getTitle();
         this.text = form.getText();
         this.createDate = DateFormat.now();
+        this.view = 0L;
     }
 
     public Board(){}

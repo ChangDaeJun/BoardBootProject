@@ -4,8 +4,11 @@ import com.boot.boardbootproject.Util.DateFormat;
 import com.boot.boardbootproject.board.dto.BoardGetForm;
 import com.boot.boardbootproject.board.dto.BoardWriteForm;
 import com.boot.boardbootproject.user.dto.UserJoinForm;
+import com.boot.boardbootproject.user.service.UserDeleteService;
 import com.boot.boardbootproject.user.service.UserJoinService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,10 +16,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 import static com.boot.boardbootproject.Util.DateFormat.*;
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest
@@ -27,15 +29,22 @@ class BoardGetServiceTest {
     private BoardWriteService boardWriteService;
     @Autowired
     private UserJoinService userJoinService;
+    @Autowired
+    private UserDeleteService userDeleteService;
 
     private Long userId;
-    @BeforeAll
+    @BeforeEach
     void before() throws Exception{
         UserJoinForm userJoinForm = new UserJoinForm();
         userJoinForm.setName("test");
         userJoinForm.setEmail("test");
         userJoinForm.setPassword("test");
         this.userId = userJoinService.join(userJoinForm);
+    }
+
+    @AfterEach
+    void after() throws Exception{
+        userDeleteService.delete(this.userId);
     }
 
     @Test
@@ -65,6 +74,6 @@ class BoardGetServiceTest {
         boardWriteService.write(boardWriteForm);
 
         List<BoardGetForm> list = boardGetService.getListAll();
-        assertThat(list, is(notNullValue()));
+        assertThat(list.size(), is(not(0)));
     }
 }
