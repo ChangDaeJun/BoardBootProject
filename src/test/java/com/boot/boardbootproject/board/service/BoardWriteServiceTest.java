@@ -5,8 +5,11 @@ import com.boot.boardbootproject.board.repository.BoardRepository;
 import com.boot.boardbootproject.user.User;
 import com.boot.boardbootproject.user.dto.UserJoinForm;
 import com.boot.boardbootproject.user.repository.UserRepository;
+import com.boot.boardbootproject.user.service.UserDeleteService;
 import com.boot.boardbootproject.user.service.UserJoinService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,16 +28,22 @@ class BoardWriteServiceTest {
     private BoardWriteService boardWriteService;
     @Autowired
     private BoardRepository boardRepository;
-
+    @Autowired
+    private UserDeleteService userDeleteService;
 
     private Long userId;
-    @BeforeAll
+    @BeforeEach
     void before() throws Exception{
         UserJoinForm userJoinForm = new UserJoinForm();
         userJoinForm.setName("test");
         userJoinForm.setEmail("test");
         userJoinForm.setPassword("test");
         userId = userJoinService.join(userJoinForm);
+    }
+
+    @AfterEach
+    void after() throws Exception{
+        userDeleteService.delete(this.userId);
     }
 
     @Test
@@ -46,7 +55,7 @@ class BoardWriteServiceTest {
         Long id = boardWriteService.write(boardWriteForm);
 
         boolean exist = boardRepository.existsById(id);
-        assertThat(exist, is(nullValue()));
+        assertThat(exist, is(true));
     }
 
     @Test
@@ -55,9 +64,11 @@ class BoardWriteServiceTest {
         boardWriteForm.setUserId(this.userId + 10000);
         boardWriteForm.setText("test text");
         boardWriteForm.setTitle("test title");
-        Long id = boardWriteService.write(boardWriteForm);
+        try {
+            Long id = boardWriteService.write(boardWriteForm);
+            fail();
+        }catch (Exception e){
 
-        boolean exist = boardRepository.existsById(id);
-        assertThat(exist, is(nullValue()));
+        }
     }
 }

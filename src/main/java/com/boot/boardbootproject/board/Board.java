@@ -1,5 +1,7 @@
 package com.boot.boardbootproject.board;
 
+import com.boot.boardbootproject.Util.DateFormat;
+import com.boot.boardbootproject.board.dto.BoardWriteForm;
 import com.boot.boardbootproject.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -31,4 +33,13 @@ public class Board {
     @Column
     @CreatedDate
     private Date createDate;
+
+    public Board(BoardWriteForm form, User user) {
+        this.user = user;
+        this.title = form.getTitle();
+        this.text = form.getText();
+        this.createDate = DateFormat.now();
+    }
+
+    public Board(){}
 }
