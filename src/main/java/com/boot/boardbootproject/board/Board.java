@@ -1,6 +1,7 @@
 package com.boot.boardbootproject.board;
 
 import com.boot.boardbootproject.Util.DateFormat;
+import com.boot.boardbootproject.board.dto.BoardUpdateForm;
 import com.boot.boardbootproject.board.dto.BoardWriteForm;
 import com.boot.boardbootproject.user.User;
 import jakarta.persistence.*;
@@ -42,4 +43,9 @@ public class Board {
     }
 
     public Board(){}
+
+    public void update(BoardUpdateForm form){
+        this.title = form.getTitle();
+        this.text = form.getText();
+    }
 }

@@ -5,8 +5,11 @@ import com.boot.boardbootproject.board.dto.BoardUpdateForm;
 import com.boot.boardbootproject.board.dto.BoardWriteForm;
 import com.boot.boardbootproject.board.repository.BoardRepository;
 import com.boot.boardbootproject.user.dto.UserJoinForm;
+import com.boot.boardbootproject.user.service.UserDeleteService;
 import com.boot.boardbootproject.user.service.UserJoinService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,10 +29,12 @@ class BoardUpdateServiceTest {
     private BoardWriteService boardWriteService;
     @Autowired
     private BoardRepository boardRepository;
+    @Autowired
+    private UserDeleteService userDeleteService;
 
 
     private Long userId;
-    @BeforeAll
+    @BeforeEach
     void before() throws Exception{
         UserJoinForm userJoinForm = new UserJoinForm();
         userJoinForm.setName("test");
@@ -37,6 +42,12 @@ class BoardUpdateServiceTest {
         userJoinForm.setPassword("test");
         userId = userJoinService.join(userJoinForm);
     }
+
+    @AfterEach
+    void after() throws Exception{
+        userDeleteService.delete(this.userId);
+    }
+
     @Test
     void update() throws Exception{
         BoardWriteForm boardWriteForm = new BoardWriteForm();

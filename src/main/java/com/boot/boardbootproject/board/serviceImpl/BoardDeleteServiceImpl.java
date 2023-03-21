@@ -7,6 +7,7 @@ import com.boot.boardbootproject.user.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,11 +16,13 @@ import java.util.List;
 public class BoardDeleteServiceImpl implements BoardDeleteService {
     private final BoardRepository boardRepository;
     @Override
+    @Transactional
     public void deleteById(Long id) throws Exception {
         boardRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public void deleteByUserId(Long userId) throws Exception {
         List<Long> boardIdList = boardRepository.findIdByUserId(userId);
         for(Long boardId : boardIdList){

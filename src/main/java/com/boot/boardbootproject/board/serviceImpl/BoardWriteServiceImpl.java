@@ -9,6 +9,7 @@ import com.boot.boardbootproject.user.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -16,6 +17,7 @@ public class BoardWriteServiceImpl implements BoardWriteService {
     private final UserRepository userRepository;
     private final BoardRepository boardRepository;
     @Override
+    @Transactional
     public Long write(BoardWriteForm form) throws Exception {
         User user = userRepository.findById(form.getUserId()).get();
         Board board = new Board(form, user);
