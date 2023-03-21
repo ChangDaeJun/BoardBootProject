@@ -2,11 +2,15 @@ package com.boot.boardbootproject.board;
 
 import com.boot.boardbootproject.user.User;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
 public class Board {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

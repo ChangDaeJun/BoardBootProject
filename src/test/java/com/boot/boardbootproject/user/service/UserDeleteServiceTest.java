@@ -1,5 +1,7 @@
 package com.boot.boardbootproject.user.service;
 
+import com.boot.boardbootproject.board.dto.BoardWriteForm;
+import com.boot.boardbootproject.board.service.BoardWriteService;
 import com.boot.boardbootproject.user.dto.UserGetForm;
 import com.boot.boardbootproject.user.dto.UserJoinForm;
 import com.boot.boardbootproject.user.repository.UserRepository;
@@ -21,6 +23,8 @@ class UserDeleteServiceTest {
     private UserJoinService userJoinService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BoardWriteService boardWriteService;
 
     @Test
     void delete() throws Exception{
@@ -50,6 +54,28 @@ class UserDeleteServiceTest {
             userDeleteService.delete(id);
             fail();
         }catch (Exception e){
+        }
+    }
+
+    @Test
+    void delete_fail_because_DeleteBoardYet() throws Exception{
+        UserJoinForm form = new UserJoinForm();
+        form.setEmail("testemailqqaa");
+        form.setName("testnameqqaa");
+        form.setPassword("testpasswoaaardqq");
+        Long id = userJoinService.join(form);
+
+        BoardWriteForm boardWriteForm = new BoardWriteForm();
+        boardWriteForm.setUserId(id);
+        boardWriteForm.setText("test text");
+        boardWriteForm.setTitle("test title");
+        boardWriteService.write(boardWriteForm);
+
+        try {
+            userDeleteService.delete(id);
+            fail();
+        }catch (Exception e){
+
         }
     }
 }
