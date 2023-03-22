@@ -1,6 +1,7 @@
 package com.boot.boardbootproject.user.serviceImpl;
 
 import com.boot.boardbootproject.board.service.BoardDeleteService;
+import com.boot.boardbootproject.comment.service.CommentDeleteService;
 import com.boot.boardbootproject.likes.service.LikeCancelService;
 import com.boot.boardbootproject.user.User;
 import com.boot.boardbootproject.user.repository.UserRepository;
@@ -15,12 +16,14 @@ public class UserDeleteServiceImpl implements UserDeleteService {
     private final UserRepository userRepository;
     private final BoardDeleteService boardDeleteService;
     private final LikeCancelService likeCancelService;
+    private final CommentDeleteService commentDeleteService;
     @Override
     @Transactional
     public void delete(Long userId) throws Exception{
         User user = userRepository.findById(userId).get();
         boardDeleteService.deleteByUserId(userId);
         likeCancelService.cancelByUserId(userId);
+        commentDeleteService.deleteByUserId(userId);
         userRepository.delete(user);
     }
 }
