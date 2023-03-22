@@ -7,15 +7,15 @@ import java.util.List;
 
 @Getter
 @Setter
-public class LikeUserListForm {
+public class LikeUserIdListOnBoardForm {
     private Long boardId;
     private List<Long> userIdList;
 
-    public LikeUserListForm(Long boardId, List<Long> userIdList) {
+    public LikeUserIdListOnBoardForm(Long boardId, List<Long> userIdList) {
         this.boardId = boardId;
         this.userIdList = userIdList;
     }
 
-    public LikeUserListForm() {
+    public LikeUserIdListOnBoardForm() {
     }
 }

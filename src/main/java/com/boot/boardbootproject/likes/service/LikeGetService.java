@@ -1,9 +1,9 @@
 package com.boot.boardbootproject.likes.service;
 
-import com.boot.boardbootproject.likes.dto.LikeBoardListForm;
-import com.boot.boardbootproject.likes.dto.LikeUserListForm;
+import com.boot.boardbootproject.likes.dto.LikeBoardIdListByUserForm;
+import com.boot.boardbootproject.likes.dto.LikeUserIdListOnBoardForm;
 
 public interface LikeGetService {
-    LikeBoardListForm getByUserId(Long userId);
-    LikeUserListForm getByBoardId(Long boardId);
+    LikeBoardIdListByUserForm getByUserId(Long userId);
+    LikeUserIdListOnBoardForm getByBoardId(Long boardId);
 }
