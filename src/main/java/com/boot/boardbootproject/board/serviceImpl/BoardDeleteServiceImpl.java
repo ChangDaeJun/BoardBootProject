@@ -3,6 +3,8 @@ package com.boot.boardbootproject.board.serviceImpl;
 import com.boot.boardbootproject.board.Board;
 import com.boot.boardbootproject.board.repository.BoardRepository;
 import com.boot.boardbootproject.board.service.BoardDeleteService;
+import com.boot.boardbootproject.likes.repository.LikeRepository;
+import com.boot.boardbootproject.likes.service.LikeCancelService;
 import com.boot.boardbootproject.user.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,11 @@ import java.util.List;
 @AllArgsConstructor
 public class BoardDeleteServiceImpl implements BoardDeleteService {
     private final BoardRepository boardRepository;
+    private final LikeCancelService likeCancelService;
     @Override
     @Transactional
     public void deleteById(Long id) throws Exception {
+        likeCancelService.cancelByBoardId(id);
         boardRepository.deleteById(id);
     }
 

@@ -2,7 +2,9 @@ package com.boot.boardbootproject.likes.service;
 
 import com.boot.boardbootproject.board.dto.BoardWriteForm;
 import com.boot.boardbootproject.board.service.BoardWriteService;
+import com.boot.boardbootproject.likes.dto.LikeBoardListForm;
 import com.boot.boardbootproject.likes.dto.LikeForm;
+import com.boot.boardbootproject.likes.dto.LikeUserListForm;
 import com.boot.boardbootproject.likes.repository.LikeRepository;
 import com.boot.boardbootproject.user.dto.UserJoinForm;
 import com.boot.boardbootproject.user.service.UserDeleteService;
@@ -13,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.hamcrest.CoreMatchers.is;
@@ -30,9 +33,7 @@ class LikeGetServiceTest {
     @Autowired
     private LikeRegisterService likeRegisterService;
     @Autowired
-    private LikeCancelService likeCancelService;
-    @Autowired
-    private LikeRepository likeRepository;
+    private LikeGetService likeGetService;
 
     private Long userId;
     private Long boardId;
@@ -64,10 +65,17 @@ class LikeGetServiceTest {
 
     @Test
     void getByUserId(){
+        LikeBoardListForm list = likeGetService.getByUserId(this.userId);
 
+        assertThat(list.getUserId(), is(this.userId));
+        assertThat(list.getBoardIdList().size(),is(not(0)));
     }
 
     @Test
     void getByBoardId() {
+        LikeUserListForm list = likeGetService.getByBoardId(this.boardId);
+
+        assertThat(list.getBoardId(), is(this.boardId));
+        assertThat(list.getUserIdList().size(),is(not(0)));
     }
 }
