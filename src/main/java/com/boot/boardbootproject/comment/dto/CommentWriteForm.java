@@ -3,10 +3,9 @@ package com.boot.boardbootproject.comment.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
 @Setter
-public class CommentUpdateForm {
-    private Long id;
+@Getter
+public class CommentWriteForm {
     private Long userId;
     private Long boardId;
     private String text;
