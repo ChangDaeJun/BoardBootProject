@@ -2,7 +2,7 @@ package com.boot.boardbootproject.likes.service;
 
 import com.boot.boardbootproject.board.dto.BoardWriteForm;
 import com.boot.boardbootproject.board.service.BoardWriteService;
-import com.boot.boardbootproject.likes.dto.LikeBoardIdListByUserForm;
+import com.boot.boardbootproject.likes.dto.LikeBoardListByUserForm;
 import com.boot.boardbootproject.likes.dto.LikeForm;
 import com.boot.boardbootproject.likes.dto.LikeUserIdListOnBoardForm;
 import com.boot.boardbootproject.user.dto.UserJoinForm;
@@ -61,7 +61,7 @@ class LikeGetServiceTest {
 
     @Test
     void getByUserId(){
-        LikeBoardIdListByUserForm list = likeGetService.getByUserId(this.userId);
+        LikeBoardListByUserForm list = likeGetService.getByUserId(this.userId);
 
         assertThat(list.getUserId(), is(this.userId));
         assertThat(list.getBoardIdList().size(),is(not(0)));

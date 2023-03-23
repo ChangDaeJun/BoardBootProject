@@ -2,8 +2,11 @@ package com.boot.boardbootproject.controller;
 
 
 import com.boot.boardbootproject.board.dto.BoardGetForm;
+import com.boot.boardbootproject.board.dto.BoardListByUserForm;
 import com.boot.boardbootproject.board.service.BoardGetService;
+import com.boot.boardbootproject.comment.dto.CommentListByUserForm;
 import com.boot.boardbootproject.comment.service.CommentGetService;
+import com.boot.boardbootproject.likes.dto.LikeBoardListByUserForm;
 import com.boot.boardbootproject.likes.dto.LikeForm;
 import com.boot.boardbootproject.likes.service.LikeGetService;
 import com.boot.boardbootproject.Util.Session;
@@ -55,5 +58,13 @@ public class ViewController {
         model.addAttribute("like", likeGetService.isLike(new LikeForm(id, userId)));
         model.addAttribute("comments", commentGetService.getCommentByBoardId(id));
         return "/board/GetBoard";
+    }
+
+    @GetMapping("user/{id}")
+    public String userPage(@PathVariable Long id, Model model, HttpServletRequest request){
+        model.addAttribute("createBoards", boardGetService.getByUserId(id));
+        model.addAttribute("likeBoards", likeGetService.getByUserId(id));
+        model.addAttribute("createComments", commentGetService.getCommentByUserId(id));
+        return "/mypage/MyPage";
     }
 }

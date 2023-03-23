@@ -1,14 +1,17 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.jsp.domain.board.BoardVO" %>
-<%@ page import="com.jsp.domain.comment.CommentVO" %>
+<%@ page import="com.boot.boardbootproject.comment.dto.CommentListByUserForm" %>
+<%@ page import="com.boot.boardbootproject.likes.dto.LikeBoardListByUserForm" %>
+<%@ page import="com.boot.boardbootproject.comment.dto.CommentGetForm" %>
+<%@ page import="com.boot.boardbootproject.board.dto.BoardGetForm" %>
+<%@ page import="com.boot.boardbootproject.board.dto.BoardListByUserForm" %>
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="../layout/header.jsp"%>
 
 <%
-    List<BoardVO> createBoards = (List<BoardVO>) request.getAttribute("createBoards");
-    List<CommentVO> createComments = (List<CommentVO>) request.getAttribute("createComments");
-    List<BoardVO> likeBoards = (List<BoardVO>) request.getAttribute("likeBoards");
+    BoardListByUserForm createBoards = (BoardListByUserForm) request.getAttribute("createBoards");
+    CommentListByUserForm createComments = (CommentListByUserForm) request.getAttribute("createComments");
+    LikeBoardListByUserForm likeBoards = (LikeBoardListByUserForm) request.getAttribute("likeBoards");
 %>
 
 <center>
@@ -21,12 +24,12 @@
             <th bgcolor='orange' width='100'>조회수</th>
         </tr>
 
-        <% for(BoardVO board: createBoards){ %>
+        <% for(BoardGetForm board: createBoards.getBoards()){ %>
         <tr>
             <td> <%= board.getId() %> </td>
             <td align ='left'><a href="getBoard.do?id=<%=board.getId()%>"><%= board.getTitle() %></a></td>
-            <td><%= board.getCreatedDate()%></td>
-            <td><%= board.getViewCnt()%></td>
+            <td><%= board.getCreateDate()%></td>
+            <td><%= board.getView()%></td>
         </tr>
         <%}%>
     </table>
@@ -40,12 +43,12 @@
             <th bgcolor='orange' width='100'>조회수</th>
         </tr>
 
-        <% for(BoardVO board: likeBoards){ %>
+        <% for(BoardGetForm board: likeBoards.getBoardIdList()){ %>
         <tr>
             <td> <%= board.getId() %> </td>
             <td align ='left'><a href="getBoard.do?id=<%=board.getId()%>"><%= board.getTitle() %></a></td>
-            <td><%= board.getCreatedDate()%></td>
-            <td><%= board.getViewCnt()%></td>
+            <td><%= board.getCreateDate()%></td>
+            <td><%= board.getView()%></td>
         </tr>
         <%}%>
     </table>
@@ -58,11 +61,11 @@
             <th bgcolor='orange' width='100'>작성일</th>
         </tr>
 
-        <% for(CommentVO comment : createComments){ %>
+        <% for(CommentGetForm comment : createComments.getCommentList()){ %>
         <tr>
             <td><a href="getBoard.do?id=<%=comment.getBoardId()%>"> <%= comment.getBoardId() %> </td>
             <td><%= comment.getText()%></td>
-            <td><%= comment.getCreatedDate()%></td>
+            <td><%= comment.getCreateDate()%></td>
         </tr>
         <%}%>
     </table>
