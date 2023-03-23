@@ -1,6 +1,7 @@
 package com.boot.boardbootproject.likes.serviceImpl;
 
 import com.boot.boardbootproject.likes.dto.LikeBoardIdListByUserForm;
+import com.boot.boardbootproject.likes.dto.LikeForm;
 import com.boot.boardbootproject.likes.dto.LikeUserIdListOnBoardForm;
 import com.boot.boardbootproject.likes.repository.LikeRepository;
 import com.boot.boardbootproject.likes.service.LikeGetService;
@@ -23,5 +24,10 @@ public class LikeGetServiceImpl implements LikeGetService {
     public LikeUserIdListOnBoardForm getByBoardId(Long boardId) {
         List<Long> likeUserIdList = likeRepository.findIdByBoardId(boardId);
         return new LikeUserIdListOnBoardForm(boardId, likeUserIdList);
+    }
+
+    @Override
+    public boolean isLike(LikeForm form) {
+        return likeRepository.existsByUserIdAndBoardId(form.getUserId(), form.getBoardId());
     }
 }

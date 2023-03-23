@@ -1,10 +1,13 @@
 <%@ page import="com.boot.boardbootproject.board.dto.BoardGetForm" %>
+<%@ page import="com.boot.boardbootproject.comment.dto.CommentGetForm" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.boot.boardbootproject.comment.dto.CommentListOnBoardFrom" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 
 <%
   BoardGetForm board = (BoardGetForm) request.getAttribute("board");
-  //LikeVO likeVO = (LikeVO) request.getAttribute("like");
-  //List<CommentVO> comments = (List<CommentVO>) request.getAttribute("comments");
+  boolean like = (boolean) request.getAttribute("like");
+  CommentListOnBoardFrom comments = (CommentListOnBoardFrom) request.getAttribute("comments");
 %>
 
 <%@ include file="../layout/header.jsp" %>
@@ -33,21 +36,25 @@
         <td bgcolor='orange' width='100'>조회수</td>
         <td align='left'><%=board.getView()%></td>
       </tr>
-      <%--
       <tr>
-        <td colspan='2' align='center'>
-          <input type='submit' value='글 수정'>
-          <% if(likeVO == null) {%>
-          <button type="button" onClick="location.href='plusLike.do?id=<%=board.getId()%>'">좋아요</button>
-          <% } else {%>
-            <button type="button" onClick="location.href='minusLike.do?id=<%=board.getId()%>'">좋아요 취소</button>
-          <% }%>
-        </td>
+        <input type='submit' value='글 수정'>
       </tr>
-      --%>
     </table>
   </form>
+
   <hr>
+
+  <% if(!like) {%>
+  <form action='/board/<%=board.getId()%>/like/<%=user.getId()%>' method="POST">
+    <input type="hidden" name="_method" value="POST">
+    <input type="submit" value="좋아요">
+  </form>
+  <% } else {%>
+  <form action='/board/<%=board.getId()%>/like/<%=user.getId()%>' method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="좋아요 취소">
+  </form>
+  <% }%>
 
   <% if(user.getId() == board.getUserId()) {%>
   <form action='/board/<%=board.getId()%>' method="POST">
@@ -56,7 +63,7 @@
   </form>
   <% } %>
 
-  <form action="insertComment.do?id=<%=board.getId()%>" method="post">
+  <form action="/board/<%=board.getId()%>/comment" method="post">
     <table border="1" cellpadding="0" cellspacing="0">
       <tr>
         <td bgcolor="orange">댓글 내용</td>
@@ -72,20 +79,30 @@
 
   <table border='1' cellpadding='0' cellspacing='0' width='700'>
     <tr>
+      <th bgcolor='orange' width='40'>번호</th>
       <th bgcolor='orange' width='60'>작성자</th>
       <th bgcolor='orange' width='200'>내용</th>
       <th bgcolor='orange' width='100'>등록일</th>
+      <th width="100"></th>
     </tr>
 
-    <%--
-    <% //for(CommentVO comment : comments){ %>
+    <% for(CommentGetForm comment : comments.getCommentList()){ %>
      <tr>
-      <td> <%= //comment.getUserName() %> </td>
-      <td><%= //comment.getText()%></td>
-      <td><%= //comment.getCreatedDate()%></td>
+       <td> <%= comment.getId() %> </td>
+      <td> <%= comment.getUserName() %> </td>
+      <td><%= comment.getText()%></td>
+      <td><%= comment.getCreateDate()%></td>
+       <td>
+       <% if(user.getId() == comment.getUserId()) {%>
+       <form action='/board/<%=board.getId()%>/comment/<%=comment.getId()%>' method="POST">
+         <input type="hidden" name="_method" value="DELETE">
+         <input type="submit" value="댓글 삭제">
+       </form>
+       <% } %>
+     </td>
     </tr>
-    <%//}%>
-    --%>
+    <%}%>
+
   </table>
 
 </center>

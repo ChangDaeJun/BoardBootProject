@@ -22,7 +22,4 @@ public class CommentGetForm {
         this.boardId = boardId;
         this.text = text;
     }
-
-    public CommentGetForm() {
-    }
 }

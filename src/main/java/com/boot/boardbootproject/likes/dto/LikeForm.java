@@ -8,4 +8,9 @@ import lombok.Setter;
 public class LikeForm {
     private Long boardId;
     private Long userId;
+
+    public LikeForm(Long boardId, Long userId) {
+        this.boardId = boardId;
+        this.userId = userId;
+    }
 }

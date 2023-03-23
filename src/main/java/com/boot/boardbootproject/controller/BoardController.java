@@ -1,5 +1,6 @@
 package com.boot.boardbootproject.controller;
 
+import com.boot.boardbootproject.Util.Session;
 import com.boot.boardbootproject.board.dto.BoardWriteForm;
 import com.boot.boardbootproject.board.service.BoardDeleteService;
 import com.boot.boardbootproject.board.service.BoardWriteService;
@@ -19,15 +20,13 @@ public class BoardController {
 
     @PostMapping("/board")
     public String writeBoard(BoardWriteForm form, HttpServletRequest request) throws Exception{
-        Long userId = ((UserGetForm) request.getSession().getAttribute("user")).getId();
-        form.setUserId(userId);
+        form.setUserId(Session.getUserId(request));
         boardWriteService.write(form);
         return "redirect:/board/list";
     }
 
     @DeleteMapping("/board/{id}")
     public String deleteBoard(@PathVariable Long id) throws Exception{
-        System.out.println("dfdddd");
         boardDeleteService.deleteById(id);
         return "redirect:/board/list";
     }
