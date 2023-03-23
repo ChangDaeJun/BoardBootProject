@@ -14,4 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select new com.boot.boardbootproject.user.dto.UserGetForm(u.id, u.name, u.joinDate) from User as u where u.id =:id")
     UserGetForm findGetFormById(Long id);
+
+    @Query("select new com.boot.boardbootproject.user.dto.UserGetForm(u.id, u.name, u.joinDate) from User as u where u.email =:email and u.password =:password")
+    UserGetForm findGetFormByEmailAndPassword(String email, String password);
 }
