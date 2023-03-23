@@ -21,4 +21,10 @@ public class BoardUpdateServiceImpl implements BoardUpdateService {
         Board board = boardRepository.findById(form.getId()).get();
         board.update(form);
     }
+
+    @Override
+    @Transactional
+    public void addView(Long boardId) {
+        boardRepository.findById(boardId).get().addView();
+    }
 }

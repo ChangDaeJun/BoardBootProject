@@ -49,4 +49,8 @@ public class Board {
         this.title = form.getTitle();
         this.text = form.getText();
     }
+
+    public void addView(){
+        this.view += 1;
+    }
 }
