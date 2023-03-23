@@ -2,7 +2,7 @@
 <%@ include file="../layout/header.jsp"%>
 
 <center>
-  <form action="insertBoard.do" method="post">
+  <form action="/board" method="post">
     <table border="1" cellpadding="0" cellspacing="0">
       <tr>
         <td bgcolor="orange" width="70">제목</td>

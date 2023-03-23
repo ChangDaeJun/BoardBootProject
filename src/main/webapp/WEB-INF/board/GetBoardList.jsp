@@ -1,11 +1,11 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.jsp.domain.board.BoardVO" %>
+<%@ page import="com.boot.boardbootproject.board.dto.BoardGetForm" %>
 
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@include file="../layout/header.jsp"%>
 
 <%
-    List<BoardVO> boardVOList = (List<BoardVO>) request.getAttribute("boardList");
+    List<BoardGetForm> boardVOList = (List<BoardGetForm>) request.getAttribute("boardList");
 %>
 
 <center>
@@ -19,13 +19,13 @@
             <th bgcolor='orange' width='100'>조회수</th>
         </tr>
 
-        <% for(BoardVO board: boardVOList){ %>
+        <% for(BoardGetForm board: boardVOList){ %>
         <tr>
             <td> <%= board.getId() %> </td>
-            <td align ='left'><a href="getBoard.do?id=<%=board.getId()%>"><%= board.getTitle() %></a></td>
+            <td align ='left'><a href="/board/<%=board.getId()%>"><%= board.getTitle() %></a></td>
             <td><%= board.getUserName()%></td>
-            <td><%= board.getCreatedDate()%></td>
-            <td><%= board.getViewCnt()%></td>
+            <td><%= board.getCreateDate()%></td>
+            <td><%= board.getView()%></td>
         </tr>
         <%}%>
     </table>

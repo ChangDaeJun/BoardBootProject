@@ -1,14 +1,10 @@
-<%@ page import="com.jsp.domain.board.BoardVO" %>
-<%@ page import="com.jsp.domain.like.LikeVO" %>
-<%@ page import="com.jsp.domain.comment.CommentVO" %>
-<%@ page import="java.util.List" %>
+<%@ page import="com.boot.boardbootproject.board.dto.BoardGetForm" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 
 <%
-  BoardVO board = (BoardVO) request.getAttribute("board");
-  UserVO userVO = (UserVO) request.getSession().getAttribute("user");
-  LikeVO likeVO = (LikeVO) request.getAttribute("like");
-  List<CommentVO> comments = (List<CommentVO>) request.getAttribute("comments");
+  BoardGetForm board = (BoardGetForm) request.getAttribute("board");
+  //LikeVO likeVO = (LikeVO) request.getAttribute("like");
+  //List<CommentVO> comments = (List<CommentVO>) request.getAttribute("comments");
 %>
 
 <%@ include file="../layout/header.jsp" %>
@@ -31,13 +27,13 @@
       </tr>
       <tr>
         <td bgcolor='orange'>등록일</td>
-        <td align='left'><%=board.getCreatedDate()%></td>
+        <td align='left'><%=board.getCreateDate()%></td>
       </tr>
       <tr>
         <td bgcolor='orange' width='100'>조회수</td>
-        <td align='left'><%=board.getViewCnt()%></td>
+        <td align='left'><%=board.getView()%></td>
       </tr>
-
+      <%--
       <tr>
         <td colspan='2' align='center'>
           <input type='submit' value='글 수정'>
@@ -48,12 +44,16 @@
           <% }%>
         </td>
       </tr>
+      --%>
     </table>
   </form>
   <hr>
 
-  <% if(userVO.getRole().equals("ADMIN")) {%>
-  <a href='deleteBoard.do?id=<%=board.getId()%>'>글 삭제</a>
+  <% if(user.getId() == board.getUserId()) {%>
+  <form action='/board/<%=board.getId()%>' method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="글 삭제">
+  </form>
   <% } %>
 
   <form action="insertComment.do?id=<%=board.getId()%>" method="post">
@@ -77,13 +77,15 @@
       <th bgcolor='orange' width='100'>등록일</th>
     </tr>
 
-    <% for(CommentVO comment : comments){ %>
-    <tr>
-      <td> <%= comment.getUserName() %> </td>
-      <td><%= comment.getText()%></td>
-      <td><%= comment.getCreatedDate()%></td>
+    <%--
+    <% //for(CommentVO comment : comments){ %>
+     <tr>
+      <td> <%= //comment.getUserName() %> </td>
+      <td><%= //comment.getText()%></td>
+      <td><%= //comment.getCreatedDate()%></td>
     </tr>
-    <%}%>
+    <%//}%>
+    --%>
   </table>
 
 </center>
