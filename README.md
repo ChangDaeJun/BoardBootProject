@@ -32,6 +32,18 @@ SpringBoot, JPA를 사용한 게시판 프로젝트입니다.
 * 유저(User) : 유저 회원가입, 유저 정보 변경, 유저 회원탈퇴, 유저 페이지 
 
 ### 인터페이스 설계 
+* 유저(User)
+<img width="466" alt="image" src="https://user-images.githubusercontent.com/97227920/227390911-f5a2e328-9dac-4d25-b0c3-4026096f32d7.png">
+<img width="591" alt="image" src="https://user-images.githubusercontent.com/97227920/227391272-4ed05656-c338-4309-b909-ef9325b06052.png">
+
+* 글(Board)
+<img width="499" alt="image" src="https://user-images.githubusercontent.com/97227920/227391478-f4c83e64-d99b-477a-868d-3ec3612a5e7f.png">
+
+* 댓글(Comment)
+<img width="581" alt="image" src="https://user-images.githubusercontent.com/97227920/227391671-711565de-bb21-4745-a4cf-530be59a33d2.png">
+
+* 좋아요(Like)
+<img width="579" alt="image" src="https://user-images.githubusercontent.com/97227920/227391847-1d0e1e4a-dc8b-4e05-a11a-08122416e266.png">
 
 ### 테스트 코드 작성
 
